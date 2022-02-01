@@ -17,7 +17,8 @@ public class Params {
     private int maxSegmentSize;
     private long ledgerId;
     private long entryId;
-    private ByteBuf entry;
+    //private ByteBuf entry;
+    private int bufSize;
 
     public Params(
             ByteBuffer[] testBuf, long position, byte[] masterkey, int fileInfoVersionToWrite,
@@ -32,13 +33,14 @@ public class Params {
     }
 
 
-    public Params(ByteBufAllocator allocator, long maxCacheSize, int maxSegmentSize, long ledgerId, long entryId, ByteBuf entry) {
+    public Params(ByteBufAllocator allocator, long maxCacheSize, int maxSegmentSize, long ledgerId, long entryId, int bufSize) {
         this.allocator = allocator;
         this.maxCacheSize = maxCacheSize;
         this.maxSegmentSize = maxSegmentSize;
         this.ledgerId = ledgerId;
         this.entryId = entryId;
-        this.entry = entry;
+        //this.entry = entry;
+        this.bufSize = bufSize;
     }
 
     public ByteBuffer[] getTestBuf() {
@@ -77,8 +79,8 @@ public class Params {
         return entryId;
     }
 
-    public ByteBuf getEntry() {
-        return entry;
+    public int getBufSize() {
+        return bufSize;
     }
 
     public ByteBufAllocator getAllocator() {

@@ -11,6 +11,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HexFormat;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+
 @RunWith(Parameterized.class)
 public class TestWriteCacheClass {
 
@@ -19,7 +26,11 @@ public class TestWriteCacheClass {
     private int maxSegmentSize;
     private long ledgerId;
     private long entryId;
-    private ByteBuf entry;
+    private int bufSize;
+    //private ByteBuf entry;
+
+    private long[] entryList;
+    private ByteBuf[] bufList;
 
     public TestWriteCacheClass(Params params) {
         this.allocator = params.getAllocator();
@@ -27,7 +38,8 @@ public class TestWriteCacheClass {
         this.maxSegmentSize = params.getMaxSegmentSize();
         this.ledgerId = params.getLedgerId();
         this.entryId = params.getEntryId();
-        this.entry = params.getEntry();
+        this.bufSize = params.getBufSize();
+        //this.entry = params.getEntry();
     }
 
     @Parameterized.Parameters
@@ -38,16 +50,63 @@ public class TestWriteCacheClass {
     @Test
     public void putTest() {
         WriteCache writeCache = new WriteCache(this.allocator, this.maxCacheSize, this.maxSegmentSize);
-        writeCache.put(this.ledgerId, this.entryId, this.entry);
+        ByteBuf newEntry = this.allocator.buffer(this.bufSize, this.bufSize);
+        boolean bool1 = false;
+        boolean bool2 = false;
+        try {
+            bool1 = writeCache.put(this.ledgerId, this.entryId, newEntry);
+            bool2 = writeCache.put(this.ledgerId, this.entryId+1, newEntry);
+            assertEquals(writeCache.get(this.ledgerId, this.entryId), writeCache.get(this.ledgerId, this.entryId+1));
+            assertTrue(bool1);
+            assertTrue(bool2);
+
+        } catch(Exception e) {
+            System.out.println(e.getStackTrace());
+            assertFalse(bool1);
+            assertFalse(bool2);
+        }
+
     }
 
     @Test
     public void getTest() {
+        WriteCache writeCache = new WriteCache(this.allocator, this.maxCacheSize, this.maxSegmentSize);
+        ByteBuf newEntry = this.allocator.buffer(this.bufSize, this.bufSize);
+        ByteBuf ret = null;
+        try {
+            if(writeCache.size() == 0) {
+                assertNull(writeCache.get(this.ledgerId, this.entryId));
+                writeCache.put(this.ledgerId, this.entryId, newEntry);
+                ret = writeCache.get(this.ledgerId, this.entryId);
+                assertEquals(ret, newEntry);
+            } else {
+                ret = writeCache.get(this.ledgerId, this.entryId);
+                assertNotEquals(ret, null);
+            }
 
+        } catch(Exception e) {
+            System.out.println(e.getStackTrace());
+            assertTrue(ret.isError());
+        }
     }
 
     @Test
     public void getLastEntryTest() {
+        WriteCache writeCache = new WriteCache(this.allocator, this.maxCacheSize, this.maxSegmentSize);
+        writeCache.clear();
+        long i = 0L;
+        for(ByteBuf elem: this.bufList) {
+            writeCache.put(this.ledgerId, this.entryId+i, elem);
+            i++;
+        }
+
+
+
+
+
+
+
+
 
     }
 
