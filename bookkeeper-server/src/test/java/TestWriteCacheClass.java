@@ -1,3 +1,4 @@
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -16,5 +17,25 @@ public class TestWriteCacheClass {
     @Parameterized.Parameters
     public static Collection<Object[]> configure() throws Exception {
         return Arrays.asList(new Object[][]{ });
+    }
+
+    @Test
+    public void putTest() {
+
+    }
+
+    @Test
+    public void getTest() {
+
+    }
+
+    @Test
+    public void getLastEntryTest() {
+
+    }
+
+    @Test
+    public void clearTest() {
+
     }
 }
