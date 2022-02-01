@@ -89,7 +89,7 @@ public class TestFileInfoClass {
     public void writeTest() {
         long numWritten = 0;
         try {
-            FileInfo fileInfo = new FileInfo(this.lf, this.masterKey, this.fileInfoVersionToWrite);
+            FileInfo fileInfo = new FileInfo(lf, masterKey, this.fileInfoVersionToWrite);
             numWritten = fileInfo.write(this.testBuf, this.position);
             assertTrue(numWritten > 0);
             assertTrue(fileInfo.size() > 0);
@@ -106,7 +106,7 @@ public class TestFileInfoClass {
         int numRead = 0;
         ByteBuffer byteBuffer = ByteBuffer.allocate(this.size);
         try {
-            FileInfo fileInfo = new FileInfo(this.lf, this.masterKey, this.fileInfoVersionToWrite);
+            FileInfo fileInfo = new FileInfo(lf, masterKey, this.fileInfoVersionToWrite);
             numRead = fileInfo.read(byteBuffer, this.position, this.bestEffort);
             if(this.bestEffort) {
                 assertNotEquals(numRead.getClass(), ShortReadException.class);
@@ -129,7 +129,7 @@ public class TestFileInfoClass {
             long numWritten = 0;
             File dest = new File(pathname);
 
-            FileInfo fileInfo = new FileInfo(lf, this.masterKey, this.fileInfoVersionToWrite);
+            FileInfo fileInfo = new FileInfo(lf, masterKey, this.fileInfoVersionToWrite);
             numWritten = fileInfo.write(this.testBuf, this.position);
 
             assertTrue(dest.exists());

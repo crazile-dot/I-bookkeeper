@@ -1,3 +1,6 @@
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+
 import java.nio.ByteBuffer;
 
 public class Params {
@@ -8,6 +11,13 @@ public class Params {
     private int size;
     private boolean bestEffort;
     private long fileSize;
+
+    private ByteBufAllocator allocator;
+    private long maxCacheSize;
+    private int maxSegmentSize;
+    private long ledgerId;
+    private long entryId;
+    private ByteBuf entry;
 
     public Params(
             ByteBuffer[] testBuf, long position, byte[] masterkey, int fileInfoVersionToWrite,
@@ -21,8 +31,14 @@ public class Params {
         this.fileSize = fileSize;
     }
 
-    public Params() {
 
+    public Params(ByteBufAllocator allocator, long maxCacheSize, int maxSegmentSize, long ledgerId, long entryId, ByteBuf entry) {
+        this.allocator = allocator;
+        this.maxCacheSize = maxCacheSize;
+        this.maxSegmentSize = maxSegmentSize;
+        this.ledgerId = ledgerId;
+        this.entryId = entryId;
+        this.entry = entry;
     }
 
     public ByteBuffer[] getTestBuf() {
@@ -52,5 +68,30 @@ public class Params {
     public long getFileSize() {
         return fileSize;
     }
+
+    public long getLedgerId() {
+        return ledgerId;
+    }
+
+    public long getEntryId() {
+        return entryId;
+    }
+
+    public ByteBuf getEntry() {
+        return entry;
+    }
+
+    public ByteBufAllocator getAllocator() {
+        return allocator;
+    }
+
+    public long getMaxCacheSize() {
+        return maxCacheSize;
+    }
+
+    public int getMaxSegmentSize() {
+        return maxSegmentSize;
+    }
+
 
 }
