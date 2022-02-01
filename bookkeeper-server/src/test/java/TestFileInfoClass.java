@@ -1,6 +1,4 @@
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import org.apache.bookkeeper.bookie.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
