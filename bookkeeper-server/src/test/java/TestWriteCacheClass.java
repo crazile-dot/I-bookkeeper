@@ -1,3 +1,4 @@
+import io.netty.buffer.ByteBuf;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,6 +10,10 @@ import java.util.HexFormat;
 
 @RunWith(Parameterized.class)
 public class TestWriteCacheClass {
+
+    private long ledgerId;
+    private long entryId;
+    private ByteBuf entry;
 
     public TestWriteCacheClass() {
 
