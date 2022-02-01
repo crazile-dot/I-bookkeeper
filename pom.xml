@@ -798,21 +798,6 @@
       <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-api-mockito2</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.powermock</groupId>
-      <artifactId>powermock-module-junit4</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -825,15 +810,6 @@
     </extensions>
     <pluginManagement>
       <plugins>
-		 <plugin>
-           <groupId>org.sonarsource.scanner.maven</groupId>
-    	   <artifactId>sonar-maven-plugin</artifactId>
-    	   <version>3.6.0.1398</version>
-        </plugin>
-        <plugin>
-    		<groupId>org.codehaus.mojo</groupId>
-   			<artifactId>sonar-maven-plugin</artifactId>
-		</plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
@@ -1063,7 +1039,7 @@
       <id>dev-debug</id>
       <build>
         <plugins>
-          
+
         </plugins>
       </build>
     </profile>
