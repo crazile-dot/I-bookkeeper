@@ -1,6 +1,5 @@
 language: java
-jdk:
-  - oraclejdk7
+
 script:
   - javac TestRunner
   - java TestRunner

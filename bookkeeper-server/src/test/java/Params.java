@@ -21,6 +21,10 @@ public class Params {
         this.fileSize = fileSize;
     }
 
+    public Params() {
+
+    }
+
     public ByteBuffer[] getTestBuf() {
         return testBuf;
     }
