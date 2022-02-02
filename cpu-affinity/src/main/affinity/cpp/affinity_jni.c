@@ -44,6 +44,9 @@ static int set_affinity(int cpuid) { return NOT_IMPLEMENTED; }
 
 static const int IS_AVAILABLE = 0;
 
+#define strerror_r(errno,buf,len) strerror_s(buf,len,errno)
+
+
 #endif
 
 #include <unistd.h>
@@ -60,7 +63,12 @@ static const int IS_AVAILABLE = 0;
  */
 JNIEXPORT jboolean JNICALL
 Java_org_apache_bookkeeper_common_util_affinity_impl_CpuAffinityJni_isRoot(JNIEnv *env, jclass cls) {
-    return getuid() == 0;
+#ifdef __linux__    
+	return getuid() == 0;
+#else
+    return 0;
+#endif	
+	
 }
 
 /*
@@ -90,7 +98,7 @@ JNIEXPORT void JNICALL Java_org_apache_bookkeeper_common_util_affinity_impl_CpuA
     } else {
         // Error in sched_setaffinity, get message from errno
         char buffer[1024];
-        strerror_r(errno, buffer, sizeof(buffer));
+        strerror_r(errno, buffer,sizeof(buffer));
         (*env)->ThrowNew(env, (*env)->FindClass(env, "java/lang/Exception"), buffer);
     }
 }

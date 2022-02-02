@@ -199,7 +199,7 @@
     <spotbugs-maven-plugin.version>3.1.8</spotbugs-maven-plugin.version>
     <forkCount.variable>1</forkCount.variable>
     <servlet-api.version>4.0.0</servlet-api.version>
-    <sonar.projectKey>danielemariano:${project.groupId}:${project.artifactId}</sonar.projectKey>
+	  <sonar.projectKey>danielemariano:${project.groupId}:${project.artifactId}</sonar.projectKey>
     <sonar.links.homepage>https://github.com/danielemariano/bookkeeper-test</sonar.links.homepage>
     <sonar.links.ci>https://travis-ci.com/danielemariano/bookkeeper-test</sonar.links.ci>
     <sonar.links.scm>https://github.com/danielemariano/bookkeeper-test</sonar.links.scm>
@@ -534,10 +534,10 @@
       </dependency>
 
       <dependency>
-        <!-- needed by ZooKeeper server -->
-        <groupId>org.xerial.snappy</groupId>
-        <artifactId>snappy-java</artifactId>
-        <version>${snappy.version}</version>
+         <!-- needed by ZooKeeper server -->
+         <groupId>org.xerial.snappy</groupId>
+         <artifactId>snappy-java</artifactId>
+         <version>${snappy.version}</version>
       </dependency>
 
       <!-- curator dependencies -->
@@ -668,7 +668,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-        <scope>test</scope>
+		<scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.hamcrest</groupId>
@@ -825,7 +825,7 @@
     </extensions>
     <pluginManagement>
       <plugins>
-        <plugin>
+		<plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.6.0.1398</version>
@@ -888,7 +888,7 @@
             <compilerArg>-Xlint:unchecked</compilerArg>
             <!-- https://issues.apache.org/jira/browse/MCOMPILER-205 -->
             <compilerArg>-Xpkginfo:always</compilerArg>
-          </compilerArgs>
+	      </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -1042,7 +1042,7 @@
     </plugins>
   </build>
   <profiles>
-    <profile>
+  <profile>
       <id>coverage</id>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -1155,12 +1155,12 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs-maven-plugin</artifactId>
-            <configuration>
-              <skip>true</skip>
-            </configuration>
+           <plugin>
+             <groupId>com.github.spotbugs</groupId>
+             <artifactId>spotbugs-maven-plugin</artifactId>
+             <configuration>
+                 <skip>true</skip>
+             </configuration>
           </plugin>
         </plugins>
       </build>

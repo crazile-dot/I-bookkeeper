@@ -68,7 +68,6 @@ class LedgerCreateOp {
     final int writeQuorumSize;
     final int ackQuorumSize;
     final Map<String, byte[]> customMetadata;
-    final int metadataFormatVersion;
     final byte[] passwd;
     final BookKeeper bk;
     final DigestType digestType;
@@ -108,7 +107,6 @@ class LedgerCreateOp {
             EnumSet<WriteFlag> writeFlags,
             BookKeeperClientStats clientStats) {
         this.bk = bk;
-        this.metadataFormatVersion = bk.getConf().getLedgerMetadataFormatVersion();
         this.ensembleSize = ensembleSize;
         this.writeQuorumSize = writeQuorumSize;
         this.ackQuorumSize = ackQuorumSize;
@@ -176,7 +174,6 @@ class LedgerCreateOp {
         if (customMetadata != null) {
             metadataBuilder.withCustomMetadata(customMetadata);
         }
-        metadataBuilder.withMetadataFormatVersion(metadataFormatVersion);
         if (bk.getConf().getStoreSystemtimeAsLedgerCreationTime()) {
             metadataBuilder.withCreationTime(System.currentTimeMillis()).storingCreationTime(true);
         }

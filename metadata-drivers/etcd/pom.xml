@@ -54,10 +54,6 @@
           <groupId>org.bouncycastle</groupId>
           <artifactId>bcpkix-jdk15on</artifactId>
         </exclusion>
-        <exclusion>
-          <groupId>io.grpc</groupId>
-          <artifactId>grpc-okhttp</artifactId>
-        </exclusion>
       </exclusions>
     </dependency>
 
@@ -144,4 +140,7 @@
       </build>
     </profile>
   </profiles>
+   <properties>
+    <sonar.coverage.jacoco.xmlReportPaths>${basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
 </project>

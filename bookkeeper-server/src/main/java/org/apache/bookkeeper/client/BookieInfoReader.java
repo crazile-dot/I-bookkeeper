@@ -34,7 +34,8 @@ import org.apache.bookkeeper.conf.ClientConfiguration;
 import org.apache.bookkeeper.net.BookieId;
 import org.apache.bookkeeper.proto.BookieClient;
 import org.apache.bookkeeper.proto.BookkeeperInternalCallbacks.GetBookieInfoCallback;
-//import org.apache.commons.collections4.CollectionUtils;
+import org.apache.bookkeeper.proto.BookkeeperProtocol;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,9 +46,9 @@ import org.slf4j.LoggerFactory;
  */
 public class BookieInfoReader {
     private static final Logger LOG = LoggerFactory.getLogger(BookieInfoReader.class);
-    /*private static final long GET_BOOKIE_INFO_REQUEST_FLAGS =
+    private static final long GET_BOOKIE_INFO_REQUEST_FLAGS =
         BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
-                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;*/
+                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;
 
     private final ScheduledExecutorService scheduler;
     private final BookKeeper bk;
@@ -115,7 +116,7 @@ public class BookieInfoReader {
 
         @SuppressWarnings("unchecked")
         public Collection<BookieId> getPartialScanTargets() {
-            //return CollectionUtils.subtract(mostRecentlyReportedBookies, infoMap.keySet());
+            return CollectionUtils.subtract(mostRecentlyReportedBookies, infoMap.keySet());
         }
 
         public Collection<BookieId> getFullScanTargets() {
@@ -303,7 +304,7 @@ public class BookieInfoReader {
      * Performs scan described by instanceState using the cached bookie information
      * in bookieInfoMap.
      */
-    /*synchronized void getReadWriteBookieInfo() {
+    synchronized void getReadWriteBookieInfo() {
         State queuedType = instanceState.getAndClearQueuedType();
         Collection<BookieId> toScan;
         if (queuedType == State.FULL) {
@@ -377,7 +378,7 @@ public class BookieInfoReader {
         if (totalSent == 0) {
             onExit();
         }
-    }*/
+    }
 
     void onExit() {
         bk.placementPolicy.updateBookieInfo(bookieInfoMap.getBookieMap());

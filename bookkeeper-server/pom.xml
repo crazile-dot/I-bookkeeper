@@ -62,10 +62,10 @@
       <artifactId>netty-handler</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-transport-native-epoll</artifactId>
-      <classifier>linux-x86_64</classifier>
-    </dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-transport-native-epoll</artifactId>
+        <classifier>linux-x86_64</classifier>
+      </dependency>
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-tcnative-boringssl-static</artifactId>
@@ -125,28 +125,28 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.kerby</groupId>
-      <artifactId>kerby-config</artifactId>
-      <version>${kerby.version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerby-config</artifactId>
+        <version>${kerby.version}</version>
+        <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>*</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.apache.kerby</groupId>
-      <artifactId>kerb-simplekdc</artifactId>
-      <version>${kerby.version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
+        <groupId>org.apache.kerby</groupId>
+        <artifactId>kerb-simplekdc</artifactId>
+        <version>${kerby.version}</version>
+        <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>*</artifactId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.zookeeper</groupId>
@@ -155,16 +155,16 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <!-- needed by ZooKeeper server -->
-      <groupId>org.xerial.snappy</groupId>
-      <artifactId>snappy-java</artifactId>
-      <scope>test</scope>
+       <!-- needed by ZooKeeper server -->
+       <groupId>org.xerial.snappy</groupId>
+       <artifactId>snappy-java</artifactId>
+       <scope>test</scope>
     </dependency>
     <dependency>
-      <!-- needed by ZooKeeper server -->
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-core</artifactId>
-      <scope>test</scope>
+        <!-- needed by ZooKeeper server -->
+       <groupId>io.dropwizard.metrics</groupId>
+       <artifactId>metrics-core</artifactId>
+       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.bookkeeper.stats</groupId>
@@ -177,6 +177,12 @@
       <artifactId>vertx-http-server</artifactId>
       <version>${project.parent.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>org.pitest</groupId>
+		<artifactId>pitest-maven</artifactId>
+		<version> 1.5.1 </version>
+		<type>maven-plugin</type>
     </dependency>
   </dependencies>
   <build>
@@ -266,8 +272,24 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+      	<version> 1.5.1 </version>
+        <configuration>
+          <targetClasses>
+            <param>org.apache.bookkeeper.bookie.storage.ldb.WriteCache</param>
+            <param>org.apache.bookkeeper.bookie.storage.ldb.ReadCache</param>          
+          </targetClasses>
+          <targetTests>
+            <param>org.apache.bookkeeper.bookie.storage.ldb.MyWriteCacheTest</param>
+	        <param>org.apache.bookkeeper.bookie.storage.ldb.MyReadCacheTest</param>
+          </targetTests>
         </configuration>
       </plugin>
 
