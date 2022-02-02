@@ -24,7 +24,7 @@ import io.netty.buffer.ByteBuf;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.bookkeeper.client.BookKeeper.DigestType;
+//import org.apache.bookkeeper.client.BookKeeper.DigestType;
 import org.apache.bookkeeper.client.EnsemblePlacementPolicy;
 import org.apache.bookkeeper.client.LedgerHandle;
 import org.apache.bookkeeper.client.RackawareEnsemblePlacementPolicy;
@@ -277,9 +277,9 @@ public class ClientConfiguration extends AbstractConfiguration<ClientConfigurati
      * @return digest type
      * @see #setBookieRecoveryDigestType
      */
-    public DigestType getBookieRecoveryDigestType() {
+    /*public DigestType getBookieRecoveryDigestType() {
         return DigestType.valueOf(this.getString(DIGEST_TYPE, DigestType.CRC32.toString()));
-    }
+    }*/
 
     /**
      * Set digest type used in bookkeeper admin.
@@ -295,10 +295,10 @@ public class ClientConfiguration extends AbstractConfiguration<ClientConfigurati
      *          Digest Type
      * @return client configuration
      */
-    public ClientConfiguration setBookieRecoveryDigestType(DigestType digestType) {
+    /*public ClientConfiguration setBookieRecoveryDigestType(DigestType digestType) {
         this.setProperty(DIGEST_TYPE, digestType.toString());
         return this;
-    }
+    }*/
 
     /**
      * Get passwd used in bookkeeper admin.
@@ -1129,10 +1129,10 @@ public class ClientConfiguration extends AbstractConfiguration<ClientConfigurati
      * Enable/disable reordering read sequence on reading entries.
      *
      * <p>If this flag is enabled, the client will use
-     * {@link EnsemblePlacementPolicy#reorderReadSequence(java.util.ArrayList,
+     * {@link EnsemblePlacementPolicy(java.util.ArrayList,
      * org.apache.bookkeeper.client.BookiesHealthInfo, org.apache.bookkeeper.client.DistributionSchedule.WriteSet)}
      * to figure out a better read sequence to attempt reads from replicas and use
-     * {@link EnsemblePlacementPolicy#reorderReadLACSequence(java.util.ArrayList,
+     * {@link EnsemblePlacementPolicy(java.util.ArrayList,
      * org.apache.bookkeeper.client.BookiesHealthInfo, org.apache.bookkeeper.client.DistributionSchedule.WriteSet)}
      * to figure out a better read sequence to attempt long poll reads from replicas.
      *

@@ -34,8 +34,8 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.bookkeeper.statelib.api.checkpoint.CheckpointStore;
 import org.apache.bookkeeper.statelib.impl.rocksdb.RocksUtils;
-import org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata;
-import org.apache.bookkeeper.stream.proto.kv.store.FileInfo;
+//import org.apache.bookkeeper.stream.proto.kv.store.CheckpointMetadata;
+//import org.apache.bookkeeper.stream.proto.kv.store.FileInfo;
 
 /**
  * CheckpointFile encapsulates the attributes and operations for a file in checkpoint.
@@ -63,6 +63,7 @@ public class CheckpointFile {
             this.isSstFile = RocksUtils.isSstFile(this.file);
             return this;
         }
+
         CheckpointFileBuilder file(File checkpointDir, String filename) {
             file(new File(checkpointDir, filename));
             return this;
@@ -125,14 +126,15 @@ public class CheckpointFile {
     public static List<CheckpointFile> list(File checkpointedDir) {
         // List for files from checkpoint folder
         return Arrays.stream(checkpointedDir.listFiles())
-            .map(f -> CheckpointFile.builder()
-                .file(f)
-                .computeChecksum()
-                .build())
-            .collect(Collectors.toList());
+                .map(f -> CheckpointFile.builder()
+                        .file(f)
+                        .computeChecksum()
+                        .build())
+                .collect(Collectors.toList());
     }
+}
 
-    public static List<CheckpointFile> list(File checkpointDir, CheckpointMetadata metadata) {
+    /*public static List<CheckpointFile> list(File checkpointDir, CheckpointMetadata metadata) {
         // List for files from checkpoint metadata
         if (metadata.getFileInfosCount() != 0) {
             return metadata.getFileInfosList().stream()
@@ -223,4 +225,4 @@ public class CheckpointFile {
             .setChecksum(checksum)
             .build();
     }
-}
+}*/

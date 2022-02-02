@@ -34,7 +34,7 @@ import org.apache.bookkeeper.conf.ClientConfiguration;
 import org.apache.bookkeeper.net.BookieId;
 import org.apache.bookkeeper.proto.BookieClient;
 import org.apache.bookkeeper.proto.BookkeeperInternalCallbacks.GetBookieInfoCallback;
-import org.apache.bookkeeper.proto.BookkeeperProtocol;
+//import org.apache.bookkeeper.proto.BookkeeperProtocol;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,11 +46,11 @@ import org.slf4j.LoggerFactory;
  */
 public class BookieInfoReader {
     private static final Logger LOG = LoggerFactory.getLogger(BookieInfoReader.class);
-    private static final long GET_BOOKIE_INFO_REQUEST_FLAGS =
+    /*private static final long GET_BOOKIE_INFO_REQUEST_FLAGS =
         BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
-                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;
+                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;*/
 
-    private final ScheduledExecutorService scheduler;
+    /*private final ScheduledExecutorService scheduler;
     private final BookKeeper bk;
     private final ClientConfiguration conf;
 
@@ -223,9 +223,10 @@ public class BookieInfoReader {
             }
         }
     }
-    private final InstanceState instanceState = new InstanceState();
+}
+    //private final InstanceState instanceState = new InstanceState();
 
-    BookieInfoReader(BookKeeper bk,
+    /*BookieInfoReader(BookKeeper bk,
                      ClientConfiguration conf,
                      ScheduledExecutorService scheduler) {
         this.bk = bk;
@@ -286,7 +287,7 @@ public class BookieInfoReader {
      * @param bookie to lookup
      * @return None if absent, free disk space if present
      */
-    synchronized Optional<Long> getFreeDiskSpace(BookieId bookie) {
+    /*synchronized Optional<Long> getFreeDiskSpace(BookieId bookie) {
         BookieInfo bookieInfo = bookieInfoMap.getInfo(bookie);
         if (bookieInfo != null) {
             return Optional.of(bookieInfo.getFreeDiskSpace());
@@ -296,7 +297,7 @@ public class BookieInfoReader {
     }
 
     /* State to track scan execution progress as callbacks come in */
-    private int totalSent = 0;
+    /*private int totalSent = 0;
     private int completedCnt = 0;
     private int errorCnt = 0;
 
@@ -304,7 +305,7 @@ public class BookieInfoReader {
      * Performs scan described by instanceState using the cached bookie information
      * in bookieInfoMap.
      */
-    synchronized void getReadWriteBookieInfo() {
+    /*synchronized void getReadWriteBookieInfo() {
         State queuedType = instanceState.getAndClearQueuedType();
         Collection<BookieId> toScan;
         if (queuedType == State.FULL) {
@@ -326,9 +327,9 @@ public class BookieInfoReader {
         }
 
         BookieClient bkc = bk.getBookieClient();
-        final long requested = BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
-                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;
-        totalSent = 0;
+        /*final long requested = BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
+                               | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;*/
+        /*totalSent = 0;
         completedCnt = 0;
         errorCnt = 0;
 
@@ -396,17 +397,17 @@ public class BookieInfoReader {
         }
     }
 
-    Map<BookieId, BookieInfo> getBookieInfo() throws BKException, InterruptedException {
+    /*Map<BookieId, BookieInfo> getBookieInfo() throws BKException, InterruptedException {
         BookieClient bkc = bk.getBookieClient();
         final AtomicInteger totalSent = new AtomicInteger();
         final AtomicInteger totalCompleted = new AtomicInteger();
         final ConcurrentMap<BookieId, BookieInfo> map =
             new ConcurrentHashMap<BookieId, BookieInfo>();
         final CountDownLatch latch = new CountDownLatch(1);
-        long requested = BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
-                         | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;
+        /*long requested = BookkeeperProtocol.GetBookieInfoRequest.Flags.TOTAL_DISK_CAPACITY_VALUE
+                         | BookkeeperProtocol.GetBookieInfoRequest.Flags.FREE_DISK_SPACE_VALUE;*/
 
-        Collection<BookieId> bookies;
+        /*Collection<BookieId> bookies;
         bookies = bk.bookieWatcher.getBookies();
         bookies.addAll(bk.bookieWatcher.getReadOnlyBookies());
         if (bookies.isEmpty()) {
@@ -444,4 +445,4 @@ public class BookieInfoReader {
         }
         return map;
     }
-}
+}*/

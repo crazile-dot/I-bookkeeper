@@ -43,7 +43,7 @@ import org.apache.bookkeeper.bookie.BookieException.UnknownBookieIdException;
 import org.apache.bookkeeper.conf.ServerConfiguration;
 import org.apache.bookkeeper.discover.RegistrationManager;
 import org.apache.bookkeeper.net.BookieId;
-import org.apache.bookkeeper.proto.DataFormats.CookieFormat;
+//import org.apache.bookkeeper.proto.DataFormats.CookieFormat;
 import org.apache.bookkeeper.util.BookKeeperConstants;
 import org.apache.bookkeeper.versioning.LongVersion;
 import org.apache.bookkeeper.versioning.Version;
@@ -151,7 +151,7 @@ public class Cookie {
         verifyInternal(c, true);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         if (layoutVersion <= 3) {
             return toStringVersion3();
@@ -298,7 +298,7 @@ public class Cookie {
         builder.setLedgerDirs(encodeDirPaths(conf.getLedgerDirNames()));
         return builder;
     }
-
+/*
     /**
      * Read cookie from registration manager.
      *
@@ -307,7 +307,7 @@ public class Cookie {
      * @return versioned cookie object
      * @throws BookieException when fail to read cookie
      */
-    public static Versioned<Cookie> readFromRegistrationManager(RegistrationManager rm, ServerConfiguration conf)
+    /*public static Versioned<Cookie> readFromRegistrationManager(RegistrationManager rm, ServerConfiguration conf)
             throws BookieException {
         try {
             return readFromRegistrationManager(rm, Bookie.getBookieId(conf));
@@ -315,7 +315,7 @@ public class Cookie {
             throw new UnknownBookieIdException(e);
         }
     }
-
+/*
     /**
      * Read cookie from registration manager for a given bookie <i>address</i>.
      *
@@ -324,7 +324,7 @@ public class Cookie {
      * @return versioned cookie object
      * @throws BookieException when fail to read cookie
      */
-    public static Versioned<Cookie> readFromRegistrationManager(RegistrationManager rm,
+    /*public static Versioned<Cookie> readFromRegistrationManager(RegistrationManager rm,
                                                          BookieId address) throws BookieException {
         Versioned<byte[]> cookieData = rm.readCookie(address);
         try {
@@ -346,7 +346,7 @@ public class Cookie {
      * @return cookie object
      * @throws IOException
      */
-    public static Cookie readFromDirectory(File directory) throws IOException {
+   /* public static Cookie readFromDirectory(File directory) throws IOException {
         File versionFile = new File(directory, BookKeeperConstants.VERSION_FILENAME);
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(versionFile), UTF_8))) {

@@ -63,7 +63,7 @@ import org.apache.bookkeeper.bookie.LedgerDirsManager;
 import org.apache.bookkeeper.bookie.LedgerDirsManager.LedgerDirsListener;
 import org.apache.bookkeeper.bookie.LedgerEntryPage;
 import org.apache.bookkeeper.bookie.StateManager;
-import org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats.LedgerData;
+//import org.apache.bookkeeper.bookie.storage.ldb.DbLedgerStorageDataFormats.LedgerData;
 import org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorage.Batch;
 import org.apache.bookkeeper.common.util.Watcher;
 import org.apache.bookkeeper.conf.ServerConfiguration;
@@ -83,7 +83,7 @@ import org.slf4j.LoggerFactory;
  *
  * <p>This is meant only to be used from {@link DbLedgerStorage}.
  */
-public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage {
+/*public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage {
     private final EntryLogger entryLogger;
 
     private final LedgerMetadataIndex ledgerIndex;
@@ -199,7 +199,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
     /**
      * Evict all the ledger info object that were not used recently.
      */
-    private void cleanupStaleTransientLedgerInfo() {
+    /*private void cleanupStaleTransientLedgerInfo() {
         transientLedgerInfoCache.removeIf((ledgerId, ledgerInfo) -> {
             boolean isStale = ledgerInfo.isStale();
             if (isStale) {
@@ -249,7 +249,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         }
     }
 
-    @Override
+    /*@Override
     public boolean ledgerExists(long ledgerId) throws IOException {
         try {
             LedgerData ledgerData = ledgerIndex.get(ledgerId);
@@ -261,17 +261,17 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
             // ledger does not exist
             return false;
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean isFenced(long ledgerId) throws IOException {
         if (log.isDebugEnabled()) {
             log.debug("isFenced. ledger: {}", ledgerId);
         }
         return ledgerIndex.get(ledgerId).getFenced();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean setFenced(long ledgerId) throws IOException {
         if (log.isDebugEnabled()) {
             log.debug("Set fenced. ledger: {}", ledgerId);
@@ -295,15 +295,15 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         ledgerIndex.setMasterKey(ledgerId, masterKey);
     }
 
-    @Override
+    /*@Override
     public byte[] readMasterKey(long ledgerId) throws IOException, BookieException {
         if (log.isDebugEnabled()) {
             log.debug("Read master key. ledger: {}", ledgerId);
         }
         return ledgerIndex.get(ledgerId).getMasterKey().toByteArray();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public long addEntry(ByteBuf entry) throws IOException, BookieException {
         long startTime = MathUtils.nowInNano();
 
@@ -343,9 +343,9 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
 
         recordSuccessfulEvent(dbLedgerStorageStats.getAddEntryStats(), startTime);
         return entryId;
-    }
+    }*/
 
-    private void triggerFlushAndAddEntry(long ledgerId, long entryId, ByteBuf entry)
+    /*private void triggerFlushAndAddEntry(long ledgerId, long entryId, ByteBuf entry)
             throws IOException, BookieException {
         dbLedgerStorageStats.getThrottledWriteRequests().inc();
         long absoluteTimeoutNanos = System.nanoTime() + maxThrottleTimeNanos;
@@ -458,7 +458,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         readCache.put(ledgerId, entryId, entry);
 
         // Try to read more entries
-        long nextEntryLocation = entryLocation + 4 /* size header */ + entry.readableBytes();
+        long nextEntryLocation = entryLocation + 4 /* size header */ /*+ entry.readableBytes();
         fillReadAheadCache(ledgerId, entryId + 1, nextEntryLocation);
 
         recordSuccessfulEvent(dbLedgerStorageStats.getReadCacheMissStats(), startTime);
@@ -478,9 +478,9 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
                     && size < maxReadAheadBytesSize
                     && currentEntryLogId == firstEntryLogId) {
                 ByteBuf entry = entryLogger.internalReadEntry(orginalLedgerId, firstEntryId, currentEntryLocation,
-                        false /* validateEntry */);
+                        false /* validateEntry *///);
 
-                try {
+                /*try {
                     long currentEntryLedgerId = entry.getLong(0);
                     long currentEntryId = entry.getLong(8);
 
@@ -674,7 +674,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
     /**
      * Swap the current write cache with the replacement cache.
      */
-    private void swapWriteCache() {
+    /*private void swapWriteCache() {
         long stamp = writeCacheRotationLock.writeLock();
         try {
             // First, swap the current write-cache map with an empty one so that writes will
@@ -747,7 +747,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         return entryLogger;
     }
 
-    @Override
+    /*@Override
     public long getLastAddConfirmed(long ledgerId) throws IOException {
         TransientLedgerInfo ledgerInfo = transientLedgerInfoCache.get(ledgerId);
         long lac = null != ledgerInfo ? ledgerInfo.getLastAddConfirmed() : TransientLedgerInfo.NOT_ASSIGNED_LAC;
@@ -785,7 +785,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         ledgerInfo.notifyWatchers(Long.MAX_VALUE);
     }
 
-    @Override
+    /*@Override
     public ByteBuf getExplicitLac(long ledgerId) throws IOException {
         if (log.isDebugEnabled()) {
             log.debug("getExplicitLac ledger {}", ledgerId);
@@ -832,7 +832,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         // No-op. Location index is already flushed in updateEntriesLocations() call
     }
 
-    /**
+   /* /**
      * Add an already existing ledger to the index.
      *
      * <p>This method is only used as a tool to help the migration from InterleaveLedgerStorage to DbLedgerStorage
@@ -843,7 +843,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
      *            Iterator over index pages from Indexed
      * @return the number of
      */
-    public long addLedgerToIndex(long ledgerId, boolean isFenced, byte[] masterKey,
+    /*public long addLedgerToIndex(long ledgerId, boolean isFenced, byte[] masterKey,
             LedgerCache.PageEntriesIterable pages) throws Exception {
         LedgerData ledgerData = LedgerData.newBuilder().setExists(true).setFenced(isFenced)
                 .setMasterKey(ByteString.copyFrom(masterKey)).build();
@@ -866,9 +866,9 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
         batch.close();
 
         return numberOfEntries.longValue();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void registerLedgerDeletionListener(LedgerDeletionListener listener) {
         ledgerDeletionListeners.add(listener);
     }
@@ -909,7 +909,7 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
     /**
      * Interface which process ledger logger.
      */
-    public interface LedgerLoggerProcessor {
+    /*public interface LedgerLoggerProcessor {
         void process(long entryId, long entryLogId, long position);
     }
 
@@ -978,4 +978,4 @@ public class SingleDirectoryDbLedgerStorage implements CompactableLedgerStorage 
             }
         };
     }
-}
+}*/

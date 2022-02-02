@@ -55,7 +55,7 @@ import org.apache.bookkeeper.bookie.LedgerDirsManager;
 import org.apache.bookkeeper.bookie.LedgerStorage;
 import org.apache.bookkeeper.bookie.StateManager;
 import org.apache.bookkeeper.bookie.storage.ldb.KeyValueStorageFactory.DbConfigType;
-import org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.LedgerLoggerProcessor;
+//import org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage.LedgerLoggerProcessor;
 import org.apache.bookkeeper.common.util.MathUtils;
 import org.apache.bookkeeper.common.util.Watcher;
 import org.apache.bookkeeper.conf.ServerConfiguration;
@@ -85,7 +85,7 @@ public class DbLedgerStorage implements LedgerStorage {
     private static final long DEFAULT_READ_CACHE_MAX_SIZE_MB = (long) (0.25 * PlatformDependent.maxDirectMemory())
             / MB;
     private int numberOfDirs;
-    private List<SingleDirectoryDbLedgerStorage> ledgerStorageList;
+    //private List<SingleDirectoryDbLedgerStorage> ledgerStorageList;
 
     // Keep 1 single Bookie GC thread so the the compactions from multiple individual directories are serialized
     private ScheduledExecutorService gcExecutor;
@@ -93,7 +93,7 @@ public class DbLedgerStorage implements LedgerStorage {
 
     protected ByteBufAllocator allocator;
 
-    @Override
+   /* @Override
     public void initialize(ServerConfiguration conf, LedgerManager ledgerManager, LedgerDirsManager ledgerDirsManager,
             LedgerDirsManager indexDirsManager, StateManager stateManager, CheckpointSource checkpointSource,
             Checkpointer checkpointer, StatsLogger statsLogger, ByteBufAllocator allocator) throws IOException {
@@ -119,29 +119,29 @@ public class DbLedgerStorage implements LedgerStorage {
 
         gcExecutor = Executors.newSingleThreadScheduledExecutor(new DefaultThreadFactory("GarbageCollector"));
 
-        ledgerStorageList = Lists.newArrayList();
+        //ledgerStorageList = Lists.newArrayList();
         for (File ledgerDir : ledgerDirsManager.getAllLedgerDirs()) {
             // Create a ledger dirs manager for the single directory
             File[] dirs = new File[1];
             // Remove the `/current` suffix which will be appended again by LedgersDirManager
             dirs[0] = ledgerDir.getParentFile();
             LedgerDirsManager ldm = new LedgerDirsManager(conf, dirs, ledgerDirsManager.getDiskChecker(), statsLogger);
-            ledgerStorageList.add(newSingleDirectoryDbLedgerStorage(conf, ledgerManager, ldm, indexDirsManager,
+            /*ledgerStorageList.add(newSingleDirectoryDbLedgerStorage(conf, ledgerManager, ldm, indexDirsManager,
                     stateManager, checkpointSource, checkpointer, statsLogger, gcExecutor, perDirectoryWriteCacheSize,
-                    perDirectoryReadCacheSize));
+                    perDirectoryReadCacheSize));*/
             ldm.getListeners().forEach(ledgerDirsManager::addLedgerDirsListener);
         }
 
-        this.stats = new DbLedgerStorageStats(
+        /*this.stats = new DbLedgerStorageStats(
             statsLogger,
             () -> ledgerStorageList.stream().mapToLong(SingleDirectoryDbLedgerStorage::getWriteCacheSize).sum(),
             () -> ledgerStorageList.stream().mapToLong(SingleDirectoryDbLedgerStorage::getWriteCacheCount).sum(),
             () -> ledgerStorageList.stream().mapToLong(SingleDirectoryDbLedgerStorage::getReadCacheSize).sum(),
             () -> ledgerStorageList.stream().mapToLong(SingleDirectoryDbLedgerStorage::getReadCacheCount).sum()
         );
-    }
+    }*/
 
-    @VisibleForTesting
+   /* @VisibleForTesting
     protected SingleDirectoryDbLedgerStorage newSingleDirectoryDbLedgerStorage(ServerConfiguration conf,
             LedgerManager ledgerManager, LedgerDirsManager ledgerDirsManager, LedgerDirsManager indexDirsManager,
             StateManager stateManager, CheckpointSource checkpointSource, Checkpointer checkpointer,

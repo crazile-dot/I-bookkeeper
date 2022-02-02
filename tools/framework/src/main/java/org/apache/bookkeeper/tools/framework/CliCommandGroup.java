@@ -18,7 +18,9 @@
 
 package org.apache.bookkeeper.tools.framework;
 
-import jdk.internal.joptsimple.internal.Strings;
+//import jdk.internal.joptsimple.internal.Strings;
+
+import com.google.common.base.Strings;
 
 /**
  * A command group that group commands together. They share same global flags.
