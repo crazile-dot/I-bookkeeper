@@ -746,6 +746,11 @@
 
       <!-- benchmark dependencies -->
       <dependency>
+        <groupId>jdk.java.net</groupId>
+        <artifactId>openjdk</artifactId>
+        <version>11.0.2</version>
+      </dependency>
+      <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
         <version>${jmh.version}</version>
