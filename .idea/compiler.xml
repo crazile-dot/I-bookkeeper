@@ -65,7 +65,7 @@
       <module name="bookkeeper-dist-server" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
       <module name="bookkeeper-perf" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
       <module name="bookkeeper-proto" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
-      <module name="bookkeeper-server" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
+      <module name="bookkeeper-server" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always --add-modules java.base" />
       <module name="bookkeeper-server-shaded" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
       <module name="bookkeeper-server-tests-shaded" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />
       <module name="bookkeeper-stats-api" options="-Werror -Xlint:deprecation -Xlint:unchecked -Xpkginfo:always" />

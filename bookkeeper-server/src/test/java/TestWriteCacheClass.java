@@ -92,22 +92,28 @@ public class TestWriteCacheClass {
 
     @Test
     public void getLastEntryTest() {
+        ByteBuf res = this.allocator.buffer();
         WriteCache writeCache = new WriteCache(this.allocator, this.maxCacheSize, this.maxSegmentSize);
-        writeCache.clear();
+        //writeCache.clear();
+        ByteBuf last = this.allocator.buffer();
         long i = 0L;
-        for(ByteBuf elem: this.bufList) {
-            writeCache.put(this.ledgerId, this.entryId+i, elem);
-            i++;
+        try {
+            if(writeCache.size() == 0) {
+                for (ByteBuf elem : this.bufList) {
+                    writeCache.put(this.ledgerId, this.entryId + i, elem);
+                    i++;
+                    last = elem;
+                }
+                res = writeCache.getLastEntry(this.ledgerId);
+                assertEquals(res, last);
+            } else {
+                res = writeCache.getLastEntry(this.ledgerId);
+                assertNotEquals(res, null);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            assertTrue(res.isError());
         }
-
-
-
-
-
-
-
-
-
     }
 
     @Test
