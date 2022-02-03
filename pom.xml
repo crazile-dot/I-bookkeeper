@@ -748,7 +748,7 @@
       <dependency>
         <groupId>jdk.java.net</groupId>
         <artifactId>openjdk</artifactId>
-        <version>11.0.2</version>
+        <version>8.0.2</version>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
@@ -1153,10 +1153,11 @@
       </build>
     </profile>
 
+
     <profile>
-      <id>jdk11-no-spotbugs</id>
+      <id>jdk8-no-spotbugs</id>
       <activation>
-        <jdk>[11,)</jdk>
+        <jdk>[8,)</jdk>
       </activation>
       <build>
         <plugins>
