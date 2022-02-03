@@ -883,7 +883,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <!--<version>${maven-compiler-plugin.version}</version>-->
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <source>${javac.target}</source>
           <target>${javac.target}</target>

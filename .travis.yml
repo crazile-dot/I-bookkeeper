@@ -1,11 +1,5 @@
 language: java
 
-addons:
-  sonarcloud:
-    organization: "danielemariano"
-    token:
-      secure: "dFjQqu+J7S1yK9IaEdIiHs5agcvv42qWEA88moCl/qeU8lagiC9GuA4GFOGpQ9wM4PWrsIG9QvDMaIU/8z0cXeFiEmRjt6AHXWqeFxt1NeF1HiLagIeyFc7E8YZ9f71lNzKInrv+Dn2RvxRxCohCun+tQQnqSYPc4tYjFTRneLoadFV/GjjO+WaT9hcWCfH34ymu42V85PdHwBG/Ld3aAlO+t+hL9a3KpdtWcsvjf9rzw2bn2gO3J+sjTVTthIawCnTN5/3+e6X626bkqrlmxrZYjUg0nSf0O9pnwRNx03iiORbV337Dv5409AfrTacrJFhLR3kOxxpiNtt9cjdgIyNQ67L4VO9HbxnXtLo1pZS9Ta2z/z3FdRhNVy34/x2Y4xCiUTPLJS9V2z1gs/trjx2lMX0XvbnAQbxWbbzw8+RZbhB/vm2XyPP4FtdHieZc2Gkbm1/h4sb+WzD3iU69sWsDQ1ufvS+/1OT9Hksww96Vtr7UzQCoc+bS8qOP6WZ/C3jxyauSwWXbnRSmw5sAkm1/UWCkzA2QYjz/lzwAH9vTuxoTeuRhe5ZrcQ7jf7nIdeJAcO7EwmL36jVHz7PBnIGBkc5xkIlv2h0lCnauCaHOW9k5/rR0n5tVZHY1k17zX/lNmx7tvYdyHcRysNdYDkGZ11wBvqJswFUkPk8tK3Y="
-
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=danielemariano_bookkeeper-test
+  - mvn clean verify
