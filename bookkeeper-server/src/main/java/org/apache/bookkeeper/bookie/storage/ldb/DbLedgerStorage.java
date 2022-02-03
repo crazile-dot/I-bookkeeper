@@ -69,8 +69,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Implementation of LedgerStorage that uses RocksDB to keep the indexes for entries stored in EntryLogs.
  */
-@Slf4j
-public class DbLedgerStorage implements LedgerStorage {
+//@Slf4j
+/*public class DbLedgerStorage implements LedgerStorage {
 
     public static final String WRITE_CACHE_MAX_SIZE_MB = "dbStorage_writeCacheMaxSizeMb";
 
@@ -129,8 +129,8 @@ public class DbLedgerStorage implements LedgerStorage {
             /*ledgerStorageList.add(newSingleDirectoryDbLedgerStorage(conf, ledgerManager, ldm, indexDirsManager,
                     stateManager, checkpointSource, checkpointer, statsLogger, gcExecutor, perDirectoryWriteCacheSize,
                     perDirectoryReadCacheSize));*/
-            ldm.getListeners().forEach(ledgerDirsManager::addLedgerDirsListener);
-        }
+           // ldm.getListeners().forEach(ledgerDirsManager::addLedgerDirsListener);
+        //}
 
         /*this.stats = new DbLedgerStorageStats(
             statsLogger,
@@ -300,7 +300,7 @@ public class DbLedgerStorage implements LedgerStorage {
      * @param processor
      * @throws IOException
      */
-    public static void readLedgerIndexEntries(long ledgerId, ServerConfiguration serverConf,
+    /*public static void readLedgerIndexEntries(long ledgerId, ServerConfiguration serverConf,
             LedgerLoggerProcessor processor) throws IOException {
 
         checkNotNull(serverConf, "ServerConfiguration can't be null");
@@ -368,4 +368,4 @@ public class DbLedgerStorage implements LedgerStorage {
         throw new UnsupportedOperationException(
                 "getListOfEntriesOfLedger method is currently unsupported for DbLedgerStorage");
     }
-}
+}*/
